@@ -54,8 +54,8 @@ io.on('connection', (socket) => {
     console.log(`Socket conectado. ID: ${socket.id}`);
 });
 
-dns.lookup('wburlani', (err, address, family) => {
-  console.log('address: 192.168.1.50 family: IPv4', address, family);
+dns.lookup('localhost', (err, address, family) => {
+  console.log('address: localhost family: IPv4', address, family);
 });
 
 /**
@@ -65,9 +65,9 @@ production.listen(3000, function () {
 });
 **/
 
-development.listen(4000, function () {
+development.listen(6500, function () {
   //console.log('Server available on port: 4000.');
-  logger.info('Server available on port: 4000.');
+  logger.info('Server available on port: 6500.');
 });
 
 
