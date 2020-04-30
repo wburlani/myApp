@@ -91,3 +91,7 @@ typings/
 public/api.html
 public/dev*.html
 public/quiz.html
+
+*.pem
+*.crt
+*.key
