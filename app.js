@@ -1,155 +1,76 @@
-﻿const express = require("express");
+﻿//Server configuration
+const express = require("express");
 const app = express();
-const handlebars = require("express-handlebars");
-const bodyParser = require("body-parser")
-const moment = require('moment')
-const cors = require('cors');
-
+const bodyParser = require('body-parser');
 const dns = require('dns');
 const https = require('https');
 const fs = require('fs');
+const moment = require('moment');
+//var moment = require('moment-timezone');
+const handlebars = require('express-handlebars')
+const logger = require('./src/utils/logger');
 
 
-//Models Import
-const Usuario = require("./models/Usuario");
-const Pagamento = require("./models/Pagamento");
-const Categoria = require("./models/Categoria");
-const Subgrupo = require("./models/Subgrupo");
-const Item = require("./models/Item");
+//moment().tz("America/Sao_Paulo")
 
-//Certificado não valido
-var server = https.createServer({
+//Certificate not validated
+var production = https.createServer({
   key: fs.readFileSync('key.pem'),
   cert: fs.readFileSync('cert.pem')
 }, app);
 
-var io = require('socket.io')(server);
 
-//Blocking websites
+var development = https.createServer({
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem')
+}, app);
 
-app.use((req, res, next)=>{
-res.header("Access-Control-Allow-Origin", '*');
-res.header("Access-Control-Allow-Methods", 'GET, PUT, POST, DELETE')
-app.use(cors());
-next();
-});
-
+var io = require('socket.io')(production, development);
+//Body Parser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.engine('handlebars', handlebars({
-    defaultLayout: 'main',
+    defaultLayout: 'main', 
     helpers: {
         formatDate: (date) => {
             return moment(date).format('DD/MM/YYYY')
         }
     }
 }));
-app.set('view engine', 'handlebars')    
+app.set('view engine', 'handlebars')
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-//Routers
-app.get('/', function (err, res) {
-    res.sendFile(__dirname + "/html/index.html");
-});
+  //Default router
+  app.use(express.static('public'));
+  app.get('/', function(req, res){
+    res.send('Hello World!');
+   });
 
-app.use(express.static('public'));
 
-app.get('/Categoria', function(req, res){
-    Categoria.findAll().then(function(categorias){
-        res.render('Categoria', {categorias: categorias});
-    });    
-});
-
-app.get('/cad-categoria', function(req, res){
-    res.render('cad-categoria');
-});
-
-app.post('/add-categoria', function(req, res){
-    Categoria.create({
-        descricaoCategoria: req.body.descricaoCategoria,
-    }).then(function() {
-         res.redirect('/categoria')
-    }).catch(function(erro) {
-        res.send("Houve um erro" + erro)
-    });
-});
-
-    app.get('/del-categoria/:idCategoria', function(req, res){
-    Categoria.destroy({
-        where: {'idCategoria': req.params.idCategoria}
-    }).then(function(){
-        res.redirect('/categoria');
-    }).catch(function(erro){
-        res.send("Código não deletado, há um relacionamento com este registro!");
-    });
-});
-
-//Subgrupos
-app.get('/Subgrupo', function(req, res){
-    Subgrupo.findAll().then(function(subgrupos){
-        res.render('Subgrupo', {subgrupos: subgrupos});
-    });
-    
-});
-
-app.get('/cad-subgrupo', function(req, res){
-    res.render('cad-subgrupo');
-});
-
-app.post('/add-subgrupo', function(req, res){
-    Subgrupo.create({
-        descricaoSubgrupo: req.body.descricaoSubgrupo,
-        fkCategoria: req.body.fkCategoria,         
-
-    }).then(function() {
-         res.redirect('/subgrupo')
-    }).catch(function(erro) {
-        res.send("Houve um erro" + erro)
-    });
-});
-
-//Produtos
-app.get('/Item', function(req, res){
-    Item.findAll().then(function(items){
-        res.render('Item', {items: items});
-    });    
-});
-
-app.get('/cad-item', function(req, res){
-    res.render('cad-item');
-});
-
-app.post('/add-item', function(req, res){
-    Item.create({
-        descricaoItem: req.body.descricaoItem,
-        descricaocodEanItem: req.body.codEanItem,
-        fkSubgrupo: req.body.fkSubgrupo,         
-
-    }).then(function() {
-         res.redirect('/item')
-    }).catch(function(erro) {
-        res.send("Houve um erro" + erro)
-    });
-});
-
-    app.get('/del-item/:idItem', function(req, res){
-    Item.destroy({
-        where: {'idItem': req.params.idItem}
-    }).then(function(){
-        res.redirect('/item');
-    }).catch(function(erro){
-        res.send("Código não deletado, há um relacionamento com este registro!");
-    });
-})
+    //Others routes
+    const router = require('./src/router.js');
+    app.use(router);
 
 io.on('connection', (socket) => {
     console.log(`Socket conectado. ID: ${socket.id}`);
 });
 
 dns.lookup('wburlani', (err, address, family) => {
-  console.log('address: 192.168.1.40 family: IPv4', address, family);
+  console.log('address: 192.168.1.50 family: IPv4', address, family);
+});
+
+/**
+production.listen(3000, function () {
+  //console.log('Server available on port: 3000.');
+  logger.info('Server available on port: 3000.');
+});
+**/
+
+development.listen(4000, function () {
+  //console.log('Server available on port: 4000.');
+  logger.info('Server available on port: 4000.');
 });
 
 
-server.listen(8081, function () {
-  console.log('Server Function url http://localhost:8081')
-});
+
+
+

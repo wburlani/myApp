@@ -1,0 +1,66 @@
+<head>
+	<title>MyApp | Users</title>
+</head>
+<body>
+	<hr>
+	<h1>USERS</h1>
+	
+	<form action="/users-post" method="POST">
+
+		<div class="container">
+		  <div class="row">
+		    <div class="col-md-3">
+		      <input class="form-control" type="text" name="name" placeholder="name">
+		    </div>
+		    <div class="col-md-3">
+		      <input class="form-control" type="password" name="password" placeholder="password">
+		    </div>
+		    <div class="col-md-3">
+		      <input class="form-control" type="text" name="email" placeholder="email">
+		    </div>
+		    <div class="col-md-3">
+		      <button type="submit" class="btn btn-primary">Register</button>
+		      <td id="myTable"><button type="export" class="btn btn-primary">Export</button></td>
+
+		    </div>
+		  </div>
+		</div>
+	</form>
+
+	<hr>	
+	<h4>Results</h4>
+	<table id="table_id" class="display">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Created</th>
+            <th>Modified</th>
+            <th>Action</th>
+            <th>Action</th>
+            <th>Action</th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+    {{#each users}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+             <td>{{email}}</td>
+             <td>{{#formatDate createdAt}}{{/formatDate}}</td>
+             <td>{{#formatDate updatedAt}}{{/formatDate}}</td>
+             <td><a href="/del-item/{{idItem}}"><button class="btn btn-warning">Update</button></a></td>
+    		 <td><a href="/del-item/{{idItem}}"><button class="btn btn-danger">Romove</button></a></td>
+    		 
+
+
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+</body>

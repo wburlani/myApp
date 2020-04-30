@@ -1,71 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-body {
-    font-size: 12pt;
-    font-family: Calibri;
-    padding : 10px;
-}
-table {
-    border: 1px solid black;
-}
-th {
-    border: 1px solid black;
-    padding: 5px;
-    background-color:grey;
-    color: white;
-}
-td {
-    border: 1px solid black;
-    padding: 5px;
-}
-input {
-    font-size: 12pt;
-    font-family: Calibri;
-}
+
+<!--Bootstrap-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css"><font></font>
+ <font></font>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script><font></font>
+
+
+
+<script src="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+<style type="text/css">
+
 </style>
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device=width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>MyApp</title>
 </head>
 <body>
-	{{{body}}}
 
-  <input type="button" id="btnExport" value=" Exportação" />
+<nav class="navbar navbar-dark ">
+   <a class="navbar-brand" href="#">
+   	<img src="myApp.png" height="60">
 
-  
-</body>
-</html>
+   </a>
+     <form class="form-inline my-2 my-lg-0">
+      	<a class="navbar" href="#">Link</a>
+      	<a class="navbar" href="#">Link</a>
+      	<a class="navbar" href="#">Link</a>
+      	<a class="navbar" href="#">Link</a>
+ 	</form>
+</nav>
+<br>
+
+
+
+<div class="container col-md-12">	
+	
+		<ul class="nav nav-tabs">
+		  <li class="nav-item">
+		    <a class="nav-link active" href="./home">Home</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="./users-listen">Listen</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="./users-register">Register</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link disabled" href="#">Disabled</a>
+		  </li>
+		</ul>
+
+		<div class="row">
+		<div class="col-md-2"></div>	
+
+		<div class="col-md-8">{{{body}}}</div>
+
+		</div>
+
+		<di class="col-md-12">
+
+			<footer>
+				Version: 1.0
+			</footer>
+
+			
+		</di>
+	
+</div>
+
 <script type="text/javascript">
+		$(document).ready( function () {
+    	$('#table_id').DataTable();
+	} );
 
-$("#btnExport").click(function(e) {
-  var a = document.createElement('a');
-  var data_type = 'data:application/vnd.ms-excel';
-  var table_div = document.getElementById('dvData');
-  var table_html = table_div.outerHTML.replace(/ /g, '%20');
-  a.href = data_type + ', ' + table_html;
-  a.download = 'filename.xls';
-  a.click();
-  e.preventDefault();
-});
-$(document).ready(function () {
-     $("#btnExport").click(function (e) {
-          e.preventDefault();
-          var table_div = document.getElementById('divTabela');   
-          // esse "\ufeff" é importante para manter os acentos         
-          var blobData = new Blob(['\ufeff'+table_div.outerHTML], { type: 'application/vnd.ms-excel' });
-          var url = window.URL.createObjectURL(blobData);
-          var a = document.createElement('a');
-          a.href = url;
-          a.download = 'Meu arquivo Excel'
-                a.click();
-            });
-        });
+	var table = $('#myTable').DataTable( {
+    buttons: [
+        {
+            text: 'My button',
+            action: function ( e, dt, button, config ) {
+                var info = dt.buttons.exportInfo();
+                // Do something with the 'info' variable when creating custom export
+            }
+        }
+    ]
+} );
 
-</script> 
+
+
+</script>
+
+
+
+
+</body>
+
+</html>
 
