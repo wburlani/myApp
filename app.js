@@ -9,16 +9,18 @@ const moment = require('moment');
 const handlebars = require('express-handlebars')
 const logger = require('./src/utils/logger');
 
-//Certificate not validated
-var production = https.createServer({
-	key: fs.readFileSync('key.pem'),
-	cert: fs.readFileSync('cert.pem')
-}, app);
 
-var development = https.createServer({
+const serverOptions = {
 	key: fs.readFileSync('key.pem'),
 	cert: fs.readFileSync('cert.pem')
-}, app);
+};
+
+const dnsHostName = 'wburlani';
+const listenPort = 6500;
+
+//Certificate not validated
+var production = https.createServer(serverOptions, app);
+var development = https.createServer(serverOptions, app);
 
 var io = require('socket.io')(production, development);
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -47,10 +49,10 @@ io.on('connection', (socket) => {
 	console.log(`Socket conectado. ID: ${socket.id}`);
 });
 
-dns.lookup('localhost', (err, address, family) => {
+dns.lookup(dnsHostName, (err, address, family) => {
 	console.log('address: localhost family: IPv4', address, family);
 });
 
-development.listen(6500, function () {
-	logger.info('Server available on port: 6500.');
+development.listen(listenPort, function () {
+	logger.info('Server available on port: ' + listenPort + ".");
 });
