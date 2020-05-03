@@ -20,7 +20,14 @@ const User = require("./database/models/user");
          User.findAll().then(function(users){
         res.render('users-register', {users: users});
     	});
-	});  
+	});
+	router.get('/users-graphing', function(req, res){	
+  		logger.info("Accessed page: users-graphing");	
+      //res.send('Listen Users');
+          User.findAll().then(function(users){
+        res.render('users-graphing', {users: users});
+    	});
+	});    
 	router.get('/users-register', function (req, res) {
 		//res.sendFile(__dirname + "/views/users-register.html");
 		res.render('users-register');

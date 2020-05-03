@@ -8,8 +8,6 @@ const fs = require('fs');
 const moment = require('moment');
 const handlebars = require('express-handlebars')
 const logger = require('./src/utils/logger');
-
-
 const serverOptions = {
 	key: fs.readFileSync('key.pem'),
 	cert: fs.readFileSync('cert.pem')
@@ -50,7 +48,7 @@ io.on('connection', (socket) => {
 });
 
 dns.lookup(dnsHostName, (err, address, family) => {
-	console.log('address: localhost family: IPv4', address, family);
+	console.log('address: 192.168.1.50 family: IPv4', address, family, dnsHostName);
 });
 
 development.listen(listenPort, function () {

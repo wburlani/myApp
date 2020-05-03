@@ -20,44 +20,35 @@
 		    </div>
 		    <div class="col-md-3">
 		      <button type="submit" class="btn btn-primary">Register</button>
-		      <td id="myTable"><button type="export" class="btn btn-primary">Export</button></td>
+		      
 
 		    </div>
 		  </div>
 		</div>
 	</form>
-
-	<hr>	
-	<h4>Results</h4>
-	<table id="table_id" class="display">
+	<hr><br>	
+ <table id="table_id" class="display">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Created</th>
-            <th>Modified</th>
-            <th>Action</th>
-            <th>Action</th>
-            <th>Action</th>
-
-
-
+            <th>ID</th>
+            <th>NAME</th>
+            <th>EMAIL</th>
+            <th>CREATED</th>
+            <th>MODIFIED</th>
+            <th>ACTION</th>
+            <th>ACTION</th>
         </tr>
     </thead>
     <tbody>
     {{#each users}}
         <tr>
-            <td>{{id}}</td>
-            <td>{{name}}</td>
-             <td>{{email}}</td>
-             <td>{{#formatDate createdAt}}{{/formatDate}}</td>
-             <td>{{#formatDate updatedAt}}{{/formatDate}}</td>
-             <td><a href="/del-item/{{idItem}}"><button class="btn btn-warning">Update</button></a></td>
-    		 <td><a href="/del-item/{{idItem}}"><button class="btn btn-danger">Romove</button></a></td>
-    		 
-
-
+	            <td>{{{id}}}</td>
+	            <td>{{{name}}}</td>
+	            <td>{{{email}}}</td>
+	            <td>{{#formatDate createdAt}}{{/formatDate}}</td>
+	            <td>{{#formatDate updatedAt}}{{/formatDate}}</td>
+	            <td><a href=""><button class="btn btn-warning">Update</button></a></td>
+	            <td><a href=""><button class="btn btn-danger">Delete</button></a></td>
         </tr>
         {{/each}}
     </tbody>

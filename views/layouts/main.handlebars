@@ -1,105 +1,118 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-<!--Bootstrap-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css"><font></font>
- <font></font>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script><font></font>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
-
-
-<script src="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"></script>
-<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="css/style.css">
-
-<style type="text/css">
-
-</style>
-
+  <link rel="stylesheet" type="text/css" href="">
+  <link rel="stylesheet" type="text/css" href="">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
-
 <nav class="navbar navbar-dark ">
    <a class="navbar-brand" href="#">
-   	<img src="myApp.png" height="60">
-
+      <img src="myApp.png" height="60">
    </a>
      <form class="form-inline my-2 my-lg-0">
-      	<a class="navbar" href="#">Link</a>
-      	<a class="navbar" href="#">Link</a>
-      	<a class="navbar" href="#">Link</a>
-      	<a class="navbar" href="#">Link</a>
- 	</form>
+         <a class="navbar" href="#">Link</a>
+         <a class="navbar" href="#">Link</a>
+         <a class="navbar" href="#">Link</a>
+         <a class="navbar" href="#">Link</a>
+   </form>
 </nav>
 <br>
-
-
-
-<div class="container col-md-12">	
-	
-		<ul class="nav nav-tabs">
-		  <li class="nav-item">
-		    <a class="nav-link active" href="./home">Home</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="./users-listen">Listen</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="./users-register">Register</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link disabled" href="#">Disabled</a>
-		  </li>
-		</ul>
-
-		<div class="row">
-		<div class="col-md-2"></div>	
-
-		<div class="col-md-8">{{{body}}}</div>
-
-		</div>
-
-		<di class="col-md-12">
-
-			<footer>
-				Version: 1.0
-			</footer>
-
-			
-		</di>
-	
+<div class="container col-md-12">      
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="./home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./users-register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./users-listen">Listen</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./users-graphing">Graphing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+      <div class="row">
+      <div class="col-md-2"></div>  
+      <div class="col-md-8">{{{body}}}</div>
+      </div>
+      <di class="col-md-12">
+         <footer>
+            Version: 1.0
+         </footer>   
+      </di> 
 </div>
-
-<script type="text/javascript">
-		$(document).ready( function () {
-    	$('#table_id').DataTable();
-	} );
-
-	var table = $('#myTable').DataTable( {
-    buttons: [
-        {
-            text: 'My button',
-            action: function ( e, dt, button, config ) {
-                var info = dt.buttons.exportInfo();
-                // Do something with the 'info' variable when creating custom export
-            }
-        }
-    ]
-} );
+   <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
 
 
 
-</script>
+    <script type="text/javascript">
+            $(document).ready(function() {
+              $('#table_id').DataTable( {
+                  dom: 'Bfrtip',
+                  buttons: [
+                      {
+                          extend:    'copyHtml5',
+                          text:      '<i class="fa fa-files-o"> COPY</i>',
+                          titleAttr: 'Copy'
+              
+                      },
+                      {
+                          extend:    'excelHtml5',
+                          text:      '<i class="fa fa-file-excel-o"> EXCEL</i>',
+                          titleAttr: 'Excel'
+                      },
+                      {
+                          extend:    'csvHtml5',
+                          text:      '<i class="fa fa-file-text-o"> CSV</i>',
+                          titleAttr: 'CSV'
+                      },
+                      {
+                          extend:    'pdfHtml5',
+                          text:      '<i class="fa fa-file-pdf-o"> PDF</i>',
+                          titleAttr: 'PDF'
+                      }
+                  ]
+              } );
+          } );
 
+
+
+    </script>
+
+
+<div class="card" style="width: 20rem; col-md-12">
+
+<div class="col-md-6">
+  <img src="{{id}}.png" class="card-img-top" alt="...">
+</div>
+  <div class="card-body col-md-6">
+    {{id}}<br>
+    {{name}}<br>
+    {{email}}<br>
+  </div>
+</div>
 
 
 
 </body>
-
 </html>
 
