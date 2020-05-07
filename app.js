@@ -13,7 +13,11 @@ const serverOptions = {
 	cert: fs.readFileSync('cert.pem')
 };
 
+
+const cors = require('cors')
+
 const dnsHostName = 'wburlani';
+const hostname = '192.168.1.97'
 const listenPort = 6500;
 
 //Certificate not validated
@@ -36,7 +40,7 @@ app.set('view engine', 'handlebars')
 //Default router
 app.use(express.static('public'));
 app.get('/', function (req, res) {
-	res.send('Hello World!');
+		res.end('Hello World!');
 });
 
 //Others routes
@@ -48,9 +52,9 @@ io.on('connection', (socket) => {
 });
 
 dns.lookup(dnsHostName, (err, address, family) => {
-	console.log('address: 192.168.1.50 family: IPv4', address, family, dnsHostName);
+	console.log('address: 192.168.1.97 family: IPv4', address, family, dnsHostName);
 });
 
-development.listen(listenPort, function () {
+development.listen(listenPort, hostname, function () {
 	logger.info('Server available on port: ' + listenPort + ".");
 });

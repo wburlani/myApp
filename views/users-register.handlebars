@@ -20,8 +20,6 @@
 		    </div>
 		    <div class="col-md-3">
 		      <button type="submit" class="btn btn-primary">Register</button>
-		      
-
 		    </div>
 		  </div>
 		</div>
@@ -36,7 +34,6 @@
             <th>CREATED</th>
             <th>MODIFIED</th>
             <th>ACTION</th>
-            <th>ACTION</th>
         </tr>
     </thead>
     <tbody>
@@ -47,8 +44,7 @@
 	            <td>{{{email}}}</td>
 	            <td>{{#formatDate createdAt}}{{/formatDate}}</td>
 	            <td>{{#formatDate updatedAt}}{{/formatDate}}</td>
-	            <td><a href=""><button class="btn btn-warning">Update</button></a></td>
-	            <td><a href=""><button class="btn btn-danger">Delete</button></a></td>
+	            <td><a href="/users-delete/{{id}}"><button class="btn btn-danger">Delete</button></a></td>	
         </tr>
         {{/each}}
     </tbody>
